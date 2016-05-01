@@ -23,5 +23,8 @@
     "chokidar-socket-emitter": "^0.4.2",
     "http-server": "^0.8.5",
     "open": "0.0.5"
+  },
+  "scripts": {
+    "start": "node server"
   }
 }
