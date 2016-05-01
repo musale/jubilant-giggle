@@ -1,16 +1,24 @@
 <!doctype html>
 <html>
 <head>
-    <title>JSPM TESTING APP</title>
+    <title>JSPM TEST</title>
     <script src="node_modules/angular2/bundles/angular2-polyfills.min.js"></script>
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
 </head>
 <body>
-<!-- this will be our entry component for the application -->
 <app></app>
 <script>
-    System.import('app').then(null, console.error.bind(console));
+    var readyForMainLoad
+    if (location.origin.match(/localhost/)) {
+        System.trace = true
+        readyForMainLoad = System.import('systemjs-hot-reloader').then(function(HotReloader){
+            hr = new HotReloader.default('http://localhost:9089');
+        });
+    }
+    Promise.resolve(readyForMainLoad).then(function() {
+        System.import("app").then(function(){ console.log("running") });
+    });
 </script>
 </body>
 </html>
